@@ -1,4 +1,8 @@
 #                               Tap To Earn Game
+
+## https://github.com/montedev0516/Monster-Tap_To_Earn_Game-frontend-V2
+## https://github.com/montedev0516/Monster-Tap_To_Earn_Game-backend-V2
+
 ![MikeToken Telegram Game Bot](/assets/First%20page.png)
 
 ## Mission
