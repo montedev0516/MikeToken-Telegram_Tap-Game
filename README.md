@@ -1,10 +1,4 @@
-#                       MikeToken  Tap To Earn Game
-##  https://github.com/montedev0516/Monster-Tap_To_Earn_Game-frontend-V2  (private)
-##  https://github.com/montedev0516/Monster-Tap_To_Earn_Game-backend-V2   (private)
-
-##  MikeToken Group :   https://t.me/MikeToken
-##  MikeToken Channel:  https://t.me/MikeTokenAnn
-
+#                               Tap To Earn Game
 ![MikeToken Telegram Game Bot](/assets/First%20page.png)
 
 ## Mission

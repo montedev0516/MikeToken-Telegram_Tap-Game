@@ -62,7 +62,7 @@ const options = {
       [
         {
           text: "Play in 1 click  🐉",
-          web_app: { url: "https://mike-coin-bot-1.vercel.app/" },
+          web_app: { url: "https://monster-tap-to-earn-game-frontend-v2.vercel.app/" },
         },
       ],
       [
@@ -114,7 +114,7 @@ const options3 = {
       [
         {
           text: "Play in 1 click  🐉",
-          web_app: { url: "https://mike-coin-bot-1.vercel.app/" },
+          web_app: { url: "https://monster-tap-to-earn-game-frontend-v2.vercel.app/" },
         },
       ],
       [
@@ -161,7 +161,7 @@ bot.on("message", async (msg: any) => {
 
     try {
       await axios.post(
-        `https://mike-token-backend-1.onrender.com/api/vibe/add`,
+        `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/vibe/add`,
         {
           username: msg.from.username,
         }
@@ -207,7 +207,7 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
 
   try {
     await axios.post(
-      `https://mike-token-backend-1.onrender.com/api/friend/add`,
+      `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/friend/add`,
       {
         username: referrerUsername,
         friend: USER_NAME,
@@ -215,7 +215,7 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
     );
 
     const response00 = await axios.post(
-      `https://mike-token-backend-1.onrender.com/api/wallet/add`,
+      `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/wallet/add`,
       {
         username: USER_NAME,
       }
@@ -258,14 +258,15 @@ app.post("/joinTG", (req: any, res: any) => {
         console.log("💪 You will gain 1000 coins!");
         try {
           await axios.post(
-            `https://mike-token-backend-1.onrender.com/api/earnings/add`,
+            `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/add`,
             { username: username }
           );
           axios.post(
-            `https://mike-token-backend-1.onrender.com/api/earnings/update/joinTelegram/${username}`,
+            `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/update/joinTelegram/${username}`,
             { status: true, earned: false }
           );
           res.status(200).json({ message: "ok", username: username });
+          console.log("---444---", res.msg);
         } catch (error) {
           console.error("Error:", error);
         }
@@ -298,14 +299,14 @@ app.post("/joinTC", (req: any, res: any) => {
         try {
           await axios
             .post(
-              `https://mike-token-backend-1.onrender.com/api/earnings/add`,
+              `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/add`,
               {
                 username: username,
               }
             )
             .then(() => {
               axios.post(
-                `https://mike-token-backend-1.onrender.com/api/earnings/update/subscribeTelegram/${username}`,
+                `https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/update/subscribeTelegram/${username}`,
                 {
                   status: true,
                   earned: false,
@@ -314,6 +315,7 @@ app.post("/joinTC", (req: any, res: any) => {
             });
 
           res.status(200).json({ message: "ok", username: username });
+          console.log("---444---", res.msg);
         } catch (error) {
           console.error("Error:", error);
         }

@@ -50,7 +50,7 @@ const options = {
             [
                 {
                     text: "Play in 1 click  🐉",
-                    web_app: { url: "https://mike-coin-bot-1.vercel.app/" },
+                    web_app: { url: "https://monster-tap-to-earn-game-frontend-v2.vercel.app/" },
                 },
             ],
             [
@@ -98,7 +98,7 @@ const options3 = {
             [
                 {
                     text: "Play in 1 click  🐉",
-                    web_app: { url: "https://mike-coin-bot-1.vercel.app/" },
+                    web_app: { url: "https://monster-tap-to-earn-game-frontend-v2.vercel.app/" },
                 },
             ],
             [
@@ -136,7 +136,7 @@ bot.on("message", async (msg) => {
         // Here, you can do something with the message, like logging or sending a confirmation
         bot.sendMessage(msg.chat.id, `User ${msg.from.username} posted a message in the group.`);
         try {
-            await axios.post(`https://mike-token-backend-1.onrender.com/api/vibe/add`, {
+            await axios.post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/vibe/add`, {
                 username: msg.from.username,
             });
             console.log("--//---OK!!!--vibe user--//---", msg.from.username);
@@ -169,11 +169,11 @@ bot.onText(/\/start (.+)/, async (msg, match) => {
     console.log("--//---referrerUsername----//---", referrerUsername);
     console.log("--//---USER_NAME----//---", USER_NAME);
     try {
-        await axios.post(`https://mike-token-backend-1.onrender.com/api/friend/add`, {
+        await axios.post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/friend/add`, {
             username: referrerUsername,
             friend: USER_NAME,
         });
-        const response00 = await axios.post(`https://mike-token-backend-1.onrender.com/api/wallet/add`, {
+        const response00 = await axios.post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/wallet/add`, {
             username: USER_NAME,
         });
         const response0 = await axios.post(`https://mike-token-backend-1.onrender.com/api/wallet/updateBalance/${USER_NAME}`, { balance: 200 });
@@ -200,9 +200,10 @@ app.post("/joinTG", (req, res) => {
         if (member.status !== "left" && member.status !== "kicked") {
             console.log("💪 You will gain 1000 coins!");
             try {
-                await axios.post(`https://mike-token-backend-1.onrender.com/api/earnings/add`, { username: username });
-                axios.post(`https://mike-token-backend-1.onrender.com/api/earnings/update/joinTelegram/${username}`, { status: true, earned: false });
+                await axios.post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/add`, { username: username });
+                axios.post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/update/joinTelegram/${username}`, { status: true, earned: false });
                 res.status(200).json({ message: "ok", username: username });
+                console.log("---444---", res.msg);
             }
             catch (error) {
                 console.error("Error:", error);
@@ -233,16 +234,17 @@ app.post("/joinTC", (req, res) => {
             console.log("💪 You will gain 1000 coins!");
             try {
                 await axios
-                    .post(`https://mike-token-backend-1.onrender.com/api/earnings/add`, {
+                    .post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/add`, {
                     username: username,
                 })
                     .then(() => {
-                    axios.post(`https://mike-token-backend-1.onrender.com/api/earnings/update/subscribeTelegram/${username}`, {
+                    axios.post(`https://monster-tap-to-earn-game-backend-v2-1.onrender.com/api/earnings/update/subscribeTelegram/${username}`, {
                         status: true,
                         earned: false,
                     });
                 });
                 res.status(200).json({ message: "ok", username: username });
+                console.log("---444---", res.msg);
             }
             catch (error) {
                 console.error("Error:", error);
