@@ -19,9 +19,11 @@
 ## Mini-app Pages
 ![Loading](/assets/Loading.png)
 ![Mint](/assets/Mint.png)
+![Task1](/assets/Task1.png)
+![Task2](/assets/Task2.png)
 ![Boost](/assets/Boost.png)
 ![Referral](/assets/Referral.png)
-![Follow](/assets/follow1.png)
+![Airdrop](/assets/Airdrop.png)
 
 
 # Required Tech and Functions
