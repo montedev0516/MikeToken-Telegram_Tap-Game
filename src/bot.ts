@@ -228,7 +228,7 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
     );
     const response2 = await axios.post(
       `https://backend.miketoken.me/api/wallet/updateBalance/${referrerUsername}`,
-      { balance: 200 + response1.data.balance }
+      { balance: 1000 + response1.data.balance }
     );
 
     console.log(response2.data);
@@ -266,14 +266,14 @@ app.post("/joinTG", (req: any, res: any) => {
               { status: true, earned: true }
             );
             res.status(200).json({ message: "ok", username: username });
-            console.log("---already you received bonus---", res.msg);
+            console.log("---already you received bonus---", res.message);
           } else {
             axios.post(
               `https://backend.miketoken.me/api/earnings/update/joinTelegram/${username}`,
               { status: true, earned: false }
             );
             res.status(200).json({ message: "ok", username: username });
-            console.log("---congratulation! Get bonus---", res.msg);
+            console.log("---congratulation! Get bonus---", res.massage);
           }
         } catch (error) {
           console.error("Error:", error);
