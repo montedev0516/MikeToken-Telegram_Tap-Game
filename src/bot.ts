@@ -33,12 +33,8 @@ let USER_ID: number = 0;
 let USER_NAME: string = "Leo_mint";
 let chatId: number = 0;
 
-<<<<<<< HEAD
 const secretkey = '';
 
-=======
-const secretkey = '05a06c693e1f334ccb3ec369d3f186e5c00e84884f72de85546d349325e39ca8';
->>>>>>> 7fe43ddb3abed6b32a9205248fc5c163905d1039
 const balance1: number = 200;
 
 //Function to encrypt data
