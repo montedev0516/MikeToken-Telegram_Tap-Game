@@ -48,9 +48,6 @@ export const encrypt = (text: string, key: string) => {
 }
 
 const encryptedbalance1 = encrypt(balance1.toString(), secretkey);
-
-console.log("🔟", encryptedbalance1);
-
 bot
   .getChat(groupUsername)
   .then((chat: any) => {
@@ -247,25 +244,23 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
       `https://backend.miketoken.me/api/wallet/${referrerUsername}`
     );
 
-    if (response1.data && typeof response1.data.balance === 'number') {
-      const balance2 = 5000 + response1.data.balance;
+    if (response1 && typeof response1.data.balance === 'number') {
+      const balance2 = response1.data.balance + 5000;
       const encryptedbalance2 = encrypt(balance2.toString(), secretkey);
 
-      console.log("🔟🔟", encryptedbalance2);
-    
-    const response2 = await axios.post(
-      `https://backend.miketoken.me/api/wallet/updateBalance/${referrerUsername}`,
-      { balance: encryptedbalance2 }
-    );
-    
-    console.log('responsedata2:', response2.data);
+      const response2 = await axios.post(
+        `https://backend.miketoken.me/api/wallet/updateBalance/${referrerUsername}`,
+        {balance: encryptedbalance2}
+      );
 
+      console.log('response2', response2.data);
     } else {
-      console.error('Invalid response format:', response1.data);
+      console.log('response1', response1.data);
     }
-
+ 
   } catch (error) {
-    console.error('error in referral function:', error);
+    console.error('error in referral function', error);
+
   }
 
 });
@@ -291,7 +286,6 @@ app.post("/joinTG", (req: any, res: any) => {
             `https://backend.miketoken.me/api/earnings/add`,
             { username: username }
           );
-
           if (response.data.joinTelegram.earned) {
             axios.post(
               `https://backend.miketoken.me/api/earnings/update/joinTelegram/${username}`,
