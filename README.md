@@ -22,7 +22,7 @@
 ![Task1](/assets/Task1.png)
 ![Task2](/assets/Task2.png)
 ![Boost](/assets/Boost.png)
-![Referral](/assets/Referral.png)
+![Referral](/assets/Refferal.png)
 ![Airdrop](/assets/Airdrop.png)
 
 
