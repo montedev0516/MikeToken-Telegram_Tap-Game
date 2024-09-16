@@ -2,6 +2,7 @@ import { url } from "inspector";
 import { text } from "stream/consumers";
 import { callback } from "telegraf/typings/button";
 import { Telegraf, Markup } from "telegraf";
+import crypto from "crypto-js";
 
 // Import the necessary packages
 const TelegramBot = require("node-telegram-bot-api");
@@ -31,6 +32,24 @@ let twitterID: number = 0;
 let USER_ID: number = 0;
 let USER_NAME: string = "Leo_mint";
 let chatId: number = 0;
+
+const secretkey = '05a06c693e1f334ccb3ec369d3f186e5c00e84884f72de85546d349325e39ca8';
+const balance1: number = 200;
+
+//Function to encrypt data
+/**
+ *encrypt plain text using AES
+ *@param text
+ *@param key
+ *@returns
+*/
+export const encrypt = (text: string, key: string) => {
+  return crypto.AES.encrypt(text, key).toString();
+}
+
+const encryptedbalance1 = encrypt(balance1.toString(), secretkey);
+
+console.log("🔟", encryptedbalance1);
 
 bot
   .getChat(groupUsername)
@@ -201,6 +220,7 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
   console.log("--//---OK!!!----//---");
   console.log("--//---referrerUsername----//---", referrerUsername);
   console.log("--//---USER_NAME----//---", USER_NAME);
+  console.log("🔟🔟", encryptedbalance1);
 
   try {
     await axios.post(
@@ -211,30 +231,43 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
       }
     );
 
-    const response00 = await axios.post(
+    await axios.post(
       `https://backend.miketoken.me/api/wallet/add`,
       {
         username: USER_NAME,
       }
     );
 
-    const response0 = await axios.post(
+    await axios.post(
       `https://backend.miketoken.me/api/wallet/updateBalance/${USER_NAME}`,
-      { balance: 200 }
+      { balance: encryptedbalance1 }
     );
 
     const response1 = await axios.post(
       `https://backend.miketoken.me/api/wallet/${referrerUsername}`
     );
+
+    if (response1.data && typeof response1.data.balance === 'number') {
+      const balance2 = 5000 + response1.data.balance;
+      const encryptedbalance2 = encrypt(balance2.toString(), secretkey);
+
+      console.log("🔟🔟", encryptedbalance2);
+    
     const response2 = await axios.post(
       `https://backend.miketoken.me/api/wallet/updateBalance/${referrerUsername}`,
-      { balance: 1000 + response1.data.balance }
+      { balance: encryptedbalance2 }
     );
+    
+    console.log('responsedata2:', response2.data);
 
-    console.log(response2.data);
+    } else {
+      console.error('Invalid response format:', response1.data);
+    }
+
   } catch (error) {
-    console.error(error);
+    console.error('error in referral function:', error);
   }
+
 });
 
 const app = express();
@@ -258,9 +291,8 @@ app.post("/joinTG", (req: any, res: any) => {
             `https://backend.miketoken.me/api/earnings/add`,
             { username: username }
           );
-          // console.log("**response**", response.data);
-          // console.log("*joinTelegram.earned", response.data.joinTelegram.earned);
-          if(response.data.joinTelegram.earned ) {
+
+          if (response.data.joinTelegram.earned) {
             axios.post(
               `https://backend.miketoken.me/api/earnings/update/joinTelegram/${username}`,
               { status: true, earned: true }
@@ -310,28 +342,28 @@ app.post("/joinTC", (req: any, res: any) => {
                 username: username,
               }
             );
-            if (response.data.subscribeTelegram.earned) {
-              await axios.post(
-                `https://backend.miketoken.me/api/earnings/update/subscribeTelegram/${username}`,
-                {
-                  status: true,
-                  earned: true,
-                }
-              );
-              res.status(200).json({ message: "ok", username: username });
-              console.log("---already you received bonus---", res.msg);
-            } else {
-              await axios.post(
-                `https://backend.miketoken.me/api/earnings/update/subscribeTelegram/${username}`,
-                {
-                  status: true,
-                  earned: false,
-                }
-              );
-              res.status(200).json({ message: "ok", username: username });
-              console.log("---Congratulation! Get bonus---", res.msg);
-            }
-            
+          if (response.data.subscribeTelegram.earned) {
+            await axios.post(
+              `https://backend.miketoken.me/api/earnings/update/subscribeTelegram/${username}`,
+              {
+                status: true,
+                earned: true,
+              }
+            );
+            res.status(200).json({ message: "ok", username: username });
+            console.log("---already you received bonus---", res.msg);
+          } else {
+            await axios.post(
+              `https://backend.miketoken.me/api/earnings/update/subscribeTelegram/${username}`,
+              {
+                status: true,
+                earned: false,
+              }
+            );
+            res.status(200).json({ message: "ok", username: username });
+            console.log("---Congratulation! Get bonus---", res.msg);
+          }
+
         } catch (error) {
           console.error("Error:", error);
         }
