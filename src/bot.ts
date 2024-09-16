@@ -2,7 +2,7 @@ import { url } from "inspector";
 import { text } from "stream/consumers";
 import { callback } from "telegraf/typings/button";
 import { Telegraf, Markup } from "telegraf";
-import crypto from 'crypto-js';
+import crypto from "crypto-js";
 
 // Import the necessary packages
 const TelegramBot = require("node-telegram-bot-api");
@@ -34,7 +34,6 @@ let USER_NAME: string = "Leo_mint";
 let chatId: number = 0;
 
 const secretkey = '05a06c693e1f334ccb3ec369d3f186e5c00e84884f72de85546d349325e39ca8';
-
 const balance1: number = 200;
 
 //Function to encrypt data
@@ -44,13 +43,11 @@ const balance1: number = 200;
  *@param key
  *@returns
 */
-
 export const encrypt = (text: string, key: string) => {
   return crypto.AES.encrypt(text, key).toString();
 }
 
 const encryptedbalance1 = encrypt(balance1.toString(), secretkey);
-
 bot
   .getChat(groupUsername)
   .then((chat: any) => {
@@ -220,6 +217,7 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
   console.log("--//---OK!!!----//---");
   console.log("--//---referrerUsername----//---", referrerUsername);
   console.log("--//---USER_NAME----//---", USER_NAME);
+  console.log("🔟🔟", encryptedbalance1);
 
   try {
     await axios.post(
@@ -262,7 +260,9 @@ bot.onText(/\/start (.+)/, async (msg: any, match: any) => {
  
   } catch (error) {
     console.error('error in referral function', error);
+
   }
+
 });
 
 const app = express();
@@ -286,8 +286,6 @@ app.post("/joinTG", (req: any, res: any) => {
             `https://backend.miketoken.me/api/earnings/add`,
             { username: username }
           );
-          // console.log("**response**", response.data);
-          // console.log("*joinTelegram.earned", response.data.joinTelegram.earned);
           if (response.data.joinTelegram.earned) {
             axios.post(
               `https://backend.miketoken.me/api/earnings/update/joinTelegram/${username}`,
